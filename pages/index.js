@@ -1,82 +1,79 @@
-import Head from 'next/head'
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import Breadcrumb from "components/Breadcrumb";
+import ToggleButton from "components/ToggleButton";
+import Me from "assets/svg-js/Me";
+import {
+  AiFillGithub,
+  AiFillFilePdf,
+  AiFillLinkedin,
+  AiFillMail,
+} from "react-icons/ai";
+import Bubble2 from "assets/svg-js/Bubble2";
+// import Resume from "assets/resume/resume.pdf";
+import { useTheme } from "next-themes";
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
+
+  // When mounted on client, we can show UI
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 px-4">
       <Head>
-        <title>Create Next App</title>
+        <title>Alix Cui</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
+      <main className="h-screen flex flex-col md:align-center md:justify-center w-full md:w-8/12 relative">
+        <ToggleButton />
+        <section className="flex flex-col md:flex-row gap-2 relative">
+          <Bubble2
+            className="absolute z-[-1] -left-24 -top-20"
+            color={theme === "light" ? "#F2F5F8" : "#40404080"}
+          />
+          <div>
+            <Breadcrumb />
+            <h1 className="text-5xl mb-2 whitespace-nowrap">
+              Hi, I'm Alix {theme === "light" ? "⛰" : "🌋"}
+            </h1>
+            <p className="mb-2 text-gray-600 dark:text-gray-200">
+              I'm currently taking a leave of absence from Stanford and
+              interning at The Washington Post as a software engineer on the
+              site team. On the side, I enjoy creating web applications and
+              learning about new modern frameworks and technologies.
             </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+            <div className="flex gap-2">
+              <a
+                href="https://github.com/acui51"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <AiFillGithub size={24} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/alix-cui/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <AiFillLinkedin size={24} />
+              </a>
+              <a href="mailto:acui@stanford.edu">
+                <AiFillMail size={24} />
+              </a>
+              <a href="/resume.pdf" target="_blank" rel="noreferrer">
+                <AiFillFilePdf size={24} />
+              </a>
+            </div>
+          </div>
+          <div>
+            <Me />
+          </div>
+        </section>
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
