@@ -28,7 +28,7 @@ const Breadcrumb = () => {
       <span className="mx-1">/</span>
       <span
         className={`text-gray-600 hover:text-gray-800 dark:text-gray-200 cursor-pointer dark:hover:text-gray-400 ${
-          router.pathname === "projects" &&
+          router.pathname === "/projects" &&
           "border-b border-gray-600 dark:border-gray-200"
         }`}
         onClick={() => router.push("/projects")}

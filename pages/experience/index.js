@@ -88,7 +88,7 @@ const Experience = () => {
             dates="Sep 2020 - Present"
           />
         </div>
-        <div className="md:mt-16">
+        <div className="self-center md:self-start md:mt-16">
           <MeExperience />
         </div>
       </main>

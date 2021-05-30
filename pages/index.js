@@ -69,7 +69,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div>
+          <div className="self-center md:self-start">
             <Me />
           </div>
         </section>
