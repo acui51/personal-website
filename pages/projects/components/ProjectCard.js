@@ -27,9 +27,10 @@ const ProjectCard = ({ technologies, name, description, github, gif }) => {
         <h1 className="text-xl font-medium mt-2">{name}</h1>
         <p>{description}</p>
         <div className="flex flex-wrap">
-          {technologies.map((technology, i) => (
-            <Technology key={i}>{technology}</Technology>
-          ))}
+          {technologies &&
+            technologies.map((technology, i) => (
+              <Technology key={i}>{technology}</Technology>
+            ))}
         </div>
       </div>
     </div>
