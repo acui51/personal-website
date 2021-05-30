@@ -9,7 +9,7 @@ const ToggleButton = () => {
     <div
       className={`md:h-screen ${
         theme === "dark" ? "dark" : ""
-      } absolute top-0 right-0`}
+      } absolute top-4 right-4 z-10`}
     >
       <div className="dark:text-white">
         <button

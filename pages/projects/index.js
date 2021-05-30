@@ -6,6 +6,7 @@ import Breadcrumb from "components/Breadcrumb";
 import Bubble2 from "assets/svg-js/Bubble2";
 import MeProjects from "assets/svg-js/MeProjects";
 import ProjectCard from "./components/ProjectCard";
+import Footer from "components/Footer";
 
 export default function ProjectsCard() {
   const [mounted, setMounted] = useState(false);
@@ -21,9 +22,9 @@ export default function ProjectsCard() {
         <title>Projects</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <ToggleButton />
       <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">
-        <div>
-          <ToggleButton />
+        <div className="relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"
             color={theme === "light" ? "#F2F5F8" : "#40404080"}
@@ -71,6 +72,7 @@ export default function ProjectsCard() {
           <MeProjects />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

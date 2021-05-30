@@ -12,6 +12,7 @@ import {
 import Bubble2 from "assets/svg-js/Bubble2";
 // import Resume from "assets/resume/resume.pdf";
 import { useTheme } from "next-themes";
+import Footer from "components/Footer";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -28,8 +29,8 @@ export default function Home() {
         <title>Alix Cui</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <ToggleButton />
       <main className="h-screen flex flex-col md:align-center md:justify-center w-full md:w-8/12 relative">
-        <ToggleButton />
         <section className="flex flex-col md:flex-row gap-2 relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"
@@ -73,6 +74,7 @@ export default function Home() {
             <Me />
           </div>
         </section>
+        <Footer />
       </main>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Breadcrumb from "components/Breadcrumb";
 import ToggleButton from "components/ToggleButton";
+import Footer from "components/Footer";
 import ExperienceBullet from "./components/ExperienceBullet";
 import Bubble2 from "assets/svg-js/Bubble2";
 import { useTheme } from "next-themes";
@@ -22,11 +23,11 @@ const Experience = () => {
         <title>Experience</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <ToggleButton />
       <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">
-        <div>
-          <ToggleButton />
+        <div className="relative">
           <Bubble2
-            className="absolute z-[-1] -left-24 -top-20 dark:color"
+            className="absolute z-[-1] -left-24 -top-20"
             color={theme === "light" ? "#F2F5F8" : "#40404080"}
           />
           <Breadcrumb />
@@ -92,6 +93,7 @@ const Experience = () => {
           <MeExperience />
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
