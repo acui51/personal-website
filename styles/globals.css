@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.h-108 {
+  height: 26rem;
+}
+
 main {
   transition: 1s;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */

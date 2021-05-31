@@ -28,7 +28,7 @@ const Experience = () => {
         <div className="relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"
-            color={theme === "light" ? "#F2F5F8" : "#40404080"}
+            color={theme === "light" ? "#F2F5F899" : "#40404080"}
           />
           <Breadcrumb />
           <h1 className="text-5xl whitespace-nowrap mb-4">Experience</h1>

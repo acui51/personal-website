@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from "react";
 
 function MeProjects(props) {
   return (
     <svg
-      width={308}
+      width={250}
       height={381}
       viewBox="0 0 308 381"
       fill="none"
@@ -59,7 +59,7 @@ function MeProjects(props) {
         fill="#37474F"
       />
     </svg>
-  )
+  );
 }
 
-export default MeProjects
+export default MeProjects;

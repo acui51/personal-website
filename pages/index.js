@@ -34,7 +34,7 @@ export default function Home() {
         <section className="flex flex-col md:flex-row gap-2 relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"
-            color={theme === "light" ? "#F2F5F8" : "#40404080"}
+            color={theme === "light" ? "#F2F5F899" : "#40404080"}
           />
           <div>
             <Breadcrumb />
