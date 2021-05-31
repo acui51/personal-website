@@ -15,7 +15,7 @@ const ToggleButton = () => {
         theme === "dark" ? "dark" : ""
       } absolute top-4 right-4 z-10`}
     >
-      <div className="dark:text-white">
+      <div className="dark:text-gray-200">
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="active:outline-none focus:outline-none"

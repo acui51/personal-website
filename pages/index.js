@@ -27,6 +27,12 @@ export default function Home() {
       <Head>
         <title>Alix Cui</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="Alix Cui's Personal Website" />
+        <meta
+          property="og:description"
+          content="A place that displays my experience and various projects."
+        />
+        <meta property="og:image" content={"/preview.png"} />
       </Head>
       <ToggleButton />
       <main className="h-screen flex flex-col md:align-center md:justify-center w-full md:w-8/12 relative">
