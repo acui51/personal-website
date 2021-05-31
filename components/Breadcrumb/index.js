@@ -5,7 +5,7 @@ const Breadcrumb = () => {
   const router = useRouter();
 
   return (
-    <div className="flex mb-1">
+    <div className="flex mb-2">
       <span
         className={`text-gray-600 hover:text-black dark:text-gray-200 cursor-pointer dark:hover:text-gray-400 ${
           router.pathname === "/" &&
