@@ -8,6 +8,7 @@ const ToggleButton = () => {
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
+  console.log("theme", theme);
 
   return (
     <div
