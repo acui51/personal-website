@@ -10,7 +10,6 @@ import {
   AiFillMail,
 } from "react-icons/ai";
 import Bubble2 from "assets/svg-js/Bubble2";
-// import Resume from "assets/resume/resume.pdf";
 import { useTheme } from "next-themes";
 import Footer from "components/Footer";
 
