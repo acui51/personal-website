@@ -15,7 +15,7 @@ const Breadcrumb = () => {
       >
         Intro
       </span>
-      <span className="mx-1">/</span>
+      <span className="mx-2">/</span>
       <span
         className={`text-gray-600 hover:text-black dark:text-gray-200 cursor-pointer dark:hover:text-gray-400 ${
           router.pathname === "/experience" &&
@@ -25,7 +25,7 @@ const Breadcrumb = () => {
       >
         Experience
       </span>
-      <span className="mx-1">/</span>
+      <span className="mx-2">/</span>
       <span
         className={`text-gray-600 hover:text-black dark:text-gray-200 cursor-pointer dark:hover:text-gray-400 ${
           router.pathname === "/projects" &&
