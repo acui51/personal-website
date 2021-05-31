@@ -38,20 +38,21 @@ export default function Home() {
           />
           <div>
             <Breadcrumb />
-            <h1 className="text-5xl mb-2 whitespace-nowrap">
+            <h1 className="text-5xl mb-3 whitespace-nowrap">
               Hi, I'm Alix {theme === "light" ? "⛰" : "🌋"}
             </h1>
-            <p className="mb-2 text-gray-600 dark:text-gray-200">
+            <p className="mb-3 text-gray-600 dark:text-gray-200">
               I'm currently taking a leave of absence from Stanford and
               interning at The Washington Post as a software engineer on the
               site team. On the side, I enjoy creating web applications and
               learning about new modern frameworks and technologies.
             </p>
-            <div className="flex gap-2">
+            <div className="flex">
               <a
                 href="https://github.com/acui51"
                 target="_blank"
                 rel="noreferrer"
+                className="mr-4"
               >
                 <AiFillGithub size={24} />
               </a>
@@ -59,10 +60,11 @@ export default function Home() {
                 href="https://www.linkedin.com/in/alix-cui/"
                 target="_blank"
                 rel="noreferrer"
+                className="mr-4"
               >
                 <AiFillLinkedin size={24} />
               </a>
-              <a href="mailto:acui@stanford.edu">
+              <a href="mailto:acui@stanford.edu" className="mr-4">
                 <AiFillMail size={24} />
               </a>
               <a href="/resume.pdf" target="_blank" rel="noreferrer">

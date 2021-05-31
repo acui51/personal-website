@@ -31,7 +31,7 @@ export default function ProjectsCard() {
           />
           <Breadcrumb />
           <h1 className="text-5xl whitespace-nowrap mb-4">Projects</h1>
-          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+          <div className="flex flex-wrap justify-center md:justify-start">
             <ProjectCard
               name="Telehistory"
               description="A web app that charts and analyzes data from your chat history on the popular messaging app, Telegram."
@@ -40,7 +40,6 @@ export default function ProjectsCard() {
                 "TypeScript",
                 "TailwindCSS",
                 "Nivo Graphs",
-                "Parallel Dots API",
               ]}
               github="https://github.com/acui51/telehistory-v2.1"
               gif="/telehistorydemo.gif"

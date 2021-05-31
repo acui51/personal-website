@@ -3,17 +3,20 @@ import Image from "next/image";
 import Technology from "pages/experience/components/Technology";
 import { AiFillGithub } from "react-icons/ai";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
 
 const ProjectCard = ({ technologies, name, description, github, gif }) => {
   const { theme } = useTheme();
+  const router = useRouter();
 
   return (
     <div
-      className="w-72 h-96 rounded-2xl shadow-lg bg-white relative"
+      className="w-72 h-96 rounded-2xl shadow-lg bg-white relative mr-4 mb-4 cursor-pointer"
       style={{ backgroundColor: theme === "dark" && "#2C2C2C" }}
+      onClick={() => router.push(github)}
     >
       <a href={github}>
-        <AiFillGithub className="absolute left-2 bottom-2" size={24} />
+        <AiFillGithub className="absolute left-2 bottom-2" size={32} />
       </a>
       <Image
         src={gif}
@@ -23,8 +26,8 @@ const ProjectCard = ({ technologies, name, description, github, gif }) => {
         layout="responsive"
         className="rounded-t-2xl"
       />
-      <div className="ml-2">
-        <h1 className="text-xl font-medium mt-2">{name}</h1>
+      <div className="p-3">
+        <h1 className="text-xl font-medium">{name}</h1>
         <p>{description}</p>
         <div className="flex flex-wrap">
           {technologies &&
