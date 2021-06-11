@@ -36,7 +36,9 @@ const Experience = () => {
             company="Amazon"
             occupation="Software Development Engineer Intern"
             dates="Jun 2021 - Sep 2021"
-            description={["Incoming Summer 2021 (AWS)"]}
+            description={[
+              "Elastic Load Balancing User Experience / Console (UXC) team.",
+            ]}
             color="rgb(255, 153, 0)"
           />
           <ExperienceBullet
@@ -44,9 +46,10 @@ const Experience = () => {
             color={theme === "light" ? "#212121" : "#aaa"}
             occupation="Software Engineer Intern"
             description={[
-              "Building front-end components using React.js for the home and article pages",
-              "Writing unit tests using Jest and Enzyme and E2E tests using Cypress",
-              "Working in agile development following scrum methodologies",
+              "Built front-end components using React.js for the home and article pages, notably creating the new author byline and bio components",
+              "Wrote unit tests using Jest and Enzyme and E2E tests using Cypress",
+              "Worked with Google Analytics for social tracking and Google Optimize for A/B testing",
+              "Worked under agile philosophy following the scrum framework",
             ]}
             technologies={["Next.js", "Jest", "Enzyme", "Cypress", "Storybook"]}
             dates="Mar 2021 - June 2021"
@@ -56,9 +59,9 @@ const Experience = () => {
             color="#B83A4B"
             occupation="Full Stack Engineer Intern"
             description={[
-              "Converting a logic courseware application to a newly improved web-based application using the MVC paradigm",
+              "Converted a logic courseware application to a newly improved web-based application using the MVC design pattern",
               "Refashioned the model component of the design pattern by serializing data from the backend into abstracted components",
-              "Integrating REST API endpoints with Java using Jersey",
+              "Integrated REST API endpoints with Java using Jersey",
               "Migrated from Bootstrap V3 to Bootstrap V4 with a complete responsive redesign of the application chrome",
             ]}
             technologies={[
@@ -74,7 +77,7 @@ const Experience = () => {
             color="#B83A4B"
             occupation="Front-end Engineer"
             description={[
-              "Improving on Carta V2 and help building Carta V3 from the ground up",
+              "Refining the course planning web application and help building a new version from the ground up witha custom design system",
               <a
                 href="http://carta-beta.stanford.edu/"
                 target="_blank"
