@@ -93,7 +93,7 @@ const Experience = () => {
           />
         </div>
         <div className="self-center md:self-start md:mt-16">
-          <MeExperience />
+          {/* <MeExperience /> */}
         </div>
       </main>
       <Footer />

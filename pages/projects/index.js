@@ -68,7 +68,7 @@ export default function ProjectsCard() {
           </div>
         </div>
         <div className="self-center mt-4 md:self-start md:ml-4 md:mt-16">
-          <MeProjects />
+          {/* <MeProjects /> */}
         </div>
       </main>
       <Footer />
