@@ -36,8 +36,19 @@ const Experience = () => {
             company="Amazon"
             occupation="Software Development Engineer Intern"
             dates="Jun 2021 - Sep 2021"
+            technologies={[
+              "Ruby on Rails",
+              "jQuery",
+              "SCSS",
+              "RSpec",
+              "Python",
+              "Selenium",
+            ]}
             description={[
-              "Elastic Load Balancing User Experience / Console (UXC) team.",
+              "Created the entire front-end of an internal tool that lets PMs and engineers grant API and Console permissions of varying degrees to multiple EC2 users at once.",
+              "Conducted user interviews, created mock ups in Figma, and polled project stakeholders weekly to ensure design aligned with user needs.",
+              "Developed the entire front-end using Ruby on Rails for templating HTML, jQuery for dynamic client-side logic, and SCSS for styling and responsiveness.",
+              "Wrote unit and integration tests with RSpec, Python and Selenium with 90% code coverage percentage.",
             ]}
             color="rgb(255, 153, 0)"
           />
@@ -46,10 +57,10 @@ const Experience = () => {
             color={theme === "light" ? "#212121" : "#aaa"}
             occupation="Software Engineer Intern"
             description={[
-              "Built front-end components using React.js for the home and article pages, notably creating the new author byline and bio components",
-              "Wrote unit tests using Jest and Enzyme and E2E tests using Cypress",
-              "Worked with Google Analytics for social tracking and Google Optimize for A/B testing",
-              "Worked under agile philosophy following the scrum framework",
+              "Engineered the new author byline and author bio components used across almost every article using Next.js and Storybook.",
+              "Created an author follow module that lets users receive notifications every time an article by the given author is published.",
+              "Wrote unit tests using Jest and Enzyme and end-to-end tests using Cypress to maintain 80% code coverage.",
+              "Worked in agile development following scrum methodologies.",
             ]}
             technologies={["Next.js", "Jest", "Enzyme", "Cypress", "Storybook"]}
             dates="Mar 2021 - June 2021"
