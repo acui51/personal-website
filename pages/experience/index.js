@@ -33,7 +33,7 @@ const Experience = () => {
           <Breadcrumb />
           <h1 className="text-5xl whitespace-nowrap mb-4">Experience</h1>
           <ExperienceBullet
-            company="Amazon"
+            company="Amazon Web Services"
             occupation="Software Development Engineer Intern"
             dates="Jun 2021 - Sep 2021"
             technologies={[
@@ -43,12 +43,14 @@ const Experience = () => {
               "RSpec",
               "Python",
               "Selenium",
+              "AWS suite",
             ]}
             description={[
               "Created the entire front-end of an internal tool that lets PMs and engineers grant API and Console permissions of varying degrees to multiple EC2 users at once.",
               "Conducted user interviews, created mock ups in Figma, and polled project stakeholders weekly to ensure design aligned with user needs.",
               "Developed the entire front-end using Ruby on Rails for templating HTML, jQuery for dynamic client-side logic, and SCSS for styling and responsiveness.",
               "Wrote unit and integration tests with RSpec, Python and Selenium with 90% code coverage percentage.",
+              "Contributed to the implementation of a Slackbot notification system using AWS suite (SNS, Chatbot, CloudMetrics).",
             ]}
             color="rgb(255, 153, 0)"
           />

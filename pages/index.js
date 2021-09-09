@@ -47,14 +47,10 @@ export default function Home() {
               Hi, I'm Alix {theme === "light" ? "⛰" : "🌋"}
             </h1>
             <p className="mb-3 text-gray-600 dark:text-gray-200">
-              {/* I'm currently taking a leave of absence from Stanford and
-              interning at The Washington Post as a software engineer on the
-              site team. On the side, I enjoy creating web applications and
-              learning about new modern frameworks and technologies. */}
-              I'm currently a rising junior at Stanford University and interning
-              at Amazon AWS on the Elastic Load Balancing UXC team. On the side,
-              I enjoy creating web applications and learning about modern
-              frameworks and technologies.
+              I'm currently a rising junior at Stanford University with recent
+              front-end internship experience at Amazon Web Services and The
+              Washington Post. On the side, I enjoy creating web applications
+              and learning about modern frameworks and technologies.
             </p>
             <div className="flex">
               <a
