@@ -33,6 +33,13 @@ const Experience = () => {
           <Breadcrumb />
           <h1 className="text-5xl whitespace-nowrap mb-4">Experience</h1>
           <ExperienceBullet
+            company="Stripe"
+            occupation="Incoming Software Engineer Intern"
+            dates="Jun 2022 - Sep 2022"
+            description={["Summer 2022"]}
+            color="#5433FF"
+          />
+          <ExperienceBullet
             company="Amazon Web Services"
             occupation="Software Development Engineer Intern"
             dates="Jun 2021 - Sep 2021"

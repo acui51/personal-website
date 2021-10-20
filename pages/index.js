@@ -47,10 +47,10 @@ export default function Home() {
               Hi, I'm Alix {theme === "light" ? "⛰" : "🌋"}
             </h1>
             <p className="mb-3 text-gray-600 dark:text-gray-200">
-              I'm currently a rising junior at Stanford University with recent
+              I'm currently a junior at Stanford University with recent
               front-end internship experience at Amazon Web Services and The
-              Washington Post. On the side, I enjoy creating web applications
-              and learning about modern frameworks and technologies.
+              Washington Post. I will be joining Stripe next summer as a
+              software engineer intern.
             </p>
             <div className="flex">
               <a
