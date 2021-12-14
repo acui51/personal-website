@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useKeyPress from "../../hooks/useKeyPress";
-import { useTheme } from "next-themes";
-import Breadcrumb from "components/Breadcrumb";
 import ToggleButton from "components/ToggleButton";
+import { useRouter } from "next/router";
 
 const INITIAL_WORDS =
   "Serious inside else memory if six. Whose group through despite cause. Sense peace economy travel. Total financial role together range line beyond its. Policy daughter need kind miss artist truth trouble. Rest human station property. Partner stock four. Region as true develop sound central. Language ball floor meet usually board necessary. Natural sport music white."; // get from BE later
@@ -39,7 +38,8 @@ const RaceMe = () => {
   const [wpmArray, setWpmArray] = useState([]);
   const [incorrectChar, setIncorrectChar] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+
+  const router = useRouter();
 
   useEffect(() => {
     const timeoutId =
@@ -52,7 +52,7 @@ const RaceMe = () => {
         setWpm(newWpm);
         const newWpmArray = wpmArray;
         newWpmArray.push(newWpm);
-        // console.log(newWpmArray);
+        console.log(newWpmArray);
         setWpmArray(newWpmArray);
       }, 1000);
 
@@ -113,7 +113,24 @@ const RaceMe = () => {
     <div className="flex items-center justify-center h-screen">
       <ToggleButton />
       <div className="font-mono text-center">
-        <h3 className="bg-[#FF990080] text-left w-max">Race me</h3>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 mb-2 cursor-pointer hover:bg-[#FF990080] rounded-md"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          onClick={() => router.push("/")}
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        <h3 className="hover:bg-[#FF990080] text-left w-max cursor-default">
+          Race me
+        </h3>
         <h3 className="text-left">WPM: {wpm}</h3>
         <h3 className="text-left">Time: {seconds}</h3>
         <p className="whitespace-pre">
