@@ -11,14 +11,14 @@ const ToggleButton = () => {
 
   return (
     <div
-      className={`md:h-screen ${
+      className={`${
         theme === "dark" ? "dark" : ""
       } absolute top-4 right-4 z-10`}
     >
       <div className="dark:text-gray-200">
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="active:outline-none focus:outline-none"
+        <span
+          onClick={(e) => setTheme(theme === "dark" ? "light" : "dark")}
+          className="active:outline-none focus:outline-none cursor-pointer"
         >
           {theme === "dark" ? (
             <svg
@@ -51,7 +51,7 @@ const ToggleButton = () => {
               />
             </svg>
           )}
-        </button>
+        </span>
       </div>
     </div>
   );

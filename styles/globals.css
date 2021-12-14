@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.hidden-animate {
+  opacity: 0;
+  transition: visibility 0s 0.7s, opacity 0.7s linear;
+}
+
 .h-108 {
   height: 26rem;
 }
