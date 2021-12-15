@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.1",
-    "@nivo/core": "^0.74.1",
-    "@nivo/line": "^0.74.1",
+    "@nivo/core": "^0.67.0",
+    "@nivo/line": "^0.67.0",
     "next": "latest",
     "next-themes": "^0.0.14",
     "react": "^17.0.1",

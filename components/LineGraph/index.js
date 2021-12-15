@@ -7,7 +7,7 @@ import { ResponsiveLine } from "@nivo/line";
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const MyResponsiveLine = ({ data /* see data tab */ }) => (
+const MyResponsiveLine = ({ data, axisLeftName, axisBottomName }) => (
   <ResponsiveLine
     data={data}
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -16,7 +16,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
       type: "linear",
       min: "auto",
       max: "auto",
-      stacked: true,
+      stacked: false,
       reverse: false
     }}
     yFormat=" >-.2f"
@@ -27,7 +27,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "transportation",
+      legend: axisBottomName,
       legendOffset: 36,
       legendPosition: "middle"
     }}
@@ -36,7 +36,7 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
+      legend: axisLeftName,
       legendOffset: -40,
       legendPosition: "middle"
     }}
