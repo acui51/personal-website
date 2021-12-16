@@ -3,6 +3,7 @@ import useKeyPress from "../../hooks/useKeyPress";
 import ToggleButton from "components/ToggleButton";
 import { useRouter } from "next/router";
 import MyResponsiveLine from "components/LineGraph";
+import { useTheme } from "next-themes";
 
 const INITIAL_WORDS =
   "Serious inside else memory if six. Whose group through despite cause. Sense peace economy travel. Total financial role together range line beyond its. Policy daughter need kind miss artist truth trouble. Rest human station property. Partner stock four. Region as true develop sound central. Language ball floor meet usually board necessary. Natural sport music white."; // get from BE later
@@ -43,6 +44,7 @@ const RaceMe = () => {
   const [mounted, setMounted] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
   const router = useRouter();
+  const { theme } = useTheme();
 
   const resetState = () => {
     setLeftPadding(new Array(30).fill(" ").join(""));
@@ -160,93 +162,98 @@ const RaceMe = () => {
   ];
 
   return (
-    <main className="flex-col">
-      <div className="flex items-center justify-center relative h-screen">
-        <ToggleButton />
-        <div className="font-mono text-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mb-2 cursor-pointer hover:bg-[#FF990080] sm:mr-auto sm:relative absolute top-4 left-4 sm:top-0 sm:left-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            onClick={() => router.push("/")}
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          <h3 className="hover:bg-[#FF990080] text-center sm:text-left sm:w-max cursor-default">
-            Race me
-          </h3>
-          <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
-          <h3 className="text-center sm:text-left">Time: {seconds}</h3>
-          <p className="whitespace-pre">
-            <span className="text-gray-400">
-              {(leftPadding + outgoingChars).slice(-30)}
-            </span>
-            <span className={incorrectChar ? "bg-red-400" : "bg-[#FF990080]"}>
-              {currentChar}
-            </span>
-            <span>{incomingChars.substr(0, 30)}</span>
-          </p>
-          <Start startTime={startTime} />
-          <span
-            className={"" + (startTime && "cursor-pointer")}
-            onClick={() => resetState()}
-          >
+    <>
+      <ToggleButton />
+      <div className="flex-col relative h-screen">
+        {/* <div className="flex items-center justify-center relative h-screen"> */}
+        <div className={"absolute top-1/2 left-1/2 transform-center "}>
+          <div className="font-mono text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class={
-                "h-5 w-5 ml-auto mr-auto " + (!startTime && "text-gray-400")
-              }
+              className="h-6 w-6 mb-2 cursor-pointer hover:bg-[#FF990080] sm:mr-auto sm:relative absolute top-4 left-4 sm:top-0 sm:left-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              onClick={() => router.push("/")}
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-          </span>
-        </div>
-      </div>
-      {seconds === 0 && (
-        <div className="font-mono">
-          <h3>WPM: {wpm}</h3>
-          <h3>
-            Accuracy:{" "}
-            {(
-              (INITIAL_WORDS.length - errorCount) /
-              INITIAL_WORDS.length
-            ).toFixed(2)}
-          </h3>
-          <div className="h-64">
-            <MyResponsiveLine
-              data={[
-                {
-                  id: "Alix",
-                  color: "hsl(359, 70%, 50%)",
-                  data: alix.map((e, i) => ({ x: i, y: e }))
-                },
-                {
-                  id: "You",
-                  data: wpmArray.map((e, i) => ({ x: i, y: e }))
+            <h3 className="hover:bg-[#FF990080] text-center sm:text-left sm:w-max cursor-default">
+              Race me
+            </h3>
+            <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
+            <h3 className="text-center sm:text-left">Time: {seconds}</h3>
+            <p className="whitespace-pre">
+              <span className="text-gray-400">
+                {(leftPadding + outgoingChars).slice(-30)}
+              </span>
+              <span className={incorrectChar ? "bg-red-400" : "bg-[#FF990080]"}>
+                {currentChar}
+              </span>
+              <span>{incomingChars.substr(0, 30)}</span>
+            </p>
+            <Start startTime={startTime} />
+            <span
+              className={"" + (startTime && "cursor-pointer")}
+              onClick={() => resetState()}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class={
+                  "h-5 w-5 ml-auto mr-auto mb-4 " +
+                  (!startTime && "text-gray-400")
                 }
-              ]}
-              axisLeftName="WPM"
-              axisBottomName="time"
-            />
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </span>
+            {seconds === 0 && (
+              <div className="font-mono">
+                <div className="h-64">
+                  <MyResponsiveLine
+                    data={[
+                      {
+                        id: "Alix",
+                        color: "hsl(359, 70%, 50%)",
+                        data: alix.map((e, i) => ({ x: i + 1, y: e }))
+                      },
+                      {
+                        id: "You",
+                        data: wpmArray.map((e, i) => ({ x: i + 1, y: e }))
+                      }
+                    ]}
+                    axisLeftName="WPM"
+                    axisBottomName="time"
+                    theme={theme}
+                  />
+                </div>
+                <h3 className="text-left">Your WPM: {wpm}</h3>
+                <h3 className="text-left">
+                  Your accuracy:{" "}
+                  {(
+                    (INITIAL_WORDS.length - errorCount) /
+                    INITIAL_WORDS.length
+                  ).toFixed(2)}
+                </h3>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </main>
+      </div>
+    </>
   );
 };
 

@@ -11,6 +11,20 @@
   height: 26rem;
 }
 
+.dark-background {
+  background-color: #40404080;
+}
+
+.transform-center {
+  transform: translate(-50%, -50%);
+}
+
+.transition-top {
+  transition: top 1s linear 0.5s;
+  top: 40%;
+  /* transition-delay: 0.5s; */
+}
+
 main {
   transition: 1s;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
