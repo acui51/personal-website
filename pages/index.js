@@ -7,15 +7,17 @@ import {
   AiFillGithub,
   AiFillFilePdf,
   AiFillLinkedin,
-  AiFillMail,
+  AiFillMail
 } from "react-icons/ai";
 import Bubble2 from "assets/svg-js/Bubble2";
 import { useTheme } from "next-themes";
 import Footer from "components/Footer";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const router = useRouter();
 
   // When mounted on client, we can show UI
   useEffect(() => setMounted(true), []);
@@ -50,14 +52,21 @@ export default function Home() {
               I'm currently a junior at Stanford University with recent
               front-end internship experience at Amazon Web Services and The
               Washington Post. I will be joining Stripe next summer as a
-              software engineer intern.
+              software engineer intern. Sometimes, I enjoy taking typing tests.
+              You can race me{" "}
+              <a
+                className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
+                onClick={() => router.push("/race-me")}
+              >
+                here
+              </a>
+              .
             </p>
-            <div className="flex">
+            <div className="flex gap-8">
               <a
                 href="https://github.com/acui51"
                 target="_blank"
                 rel="noreferrer"
-                className="mr-4"
               >
                 <AiFillGithub size={24} />
               </a>
@@ -65,11 +74,10 @@ export default function Home() {
                 href="https://www.linkedin.com/in/alix-cui/"
                 target="_blank"
                 rel="noreferrer"
-                className="mr-4"
               >
                 <AiFillLinkedin size={24} />
               </a>
-              <a href="mailto:acui@stanford.edu" className="mr-4">
+              <a href="mailto:acui@stanford.edu">
                 <AiFillMail size={24} />
               </a>
               <a href="/resume.pdf" target="_blank" rel="noreferrer">

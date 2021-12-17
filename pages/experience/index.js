@@ -34,9 +34,9 @@ const Experience = () => {
           <h1 className="text-5xl whitespace-nowrap mb-4">Experience</h1>
           <ExperienceBullet
             company="Stripe"
-            occupation="Incoming Software Engineer Intern"
+            occupation="Software Engineer Intern"
             dates="Jun 2022 - Sep 2022"
-            description={["Summer 2022"]}
+            description={["Incoming Summer 2022"]}
             color="#5433FF"
           />
           <ExperienceBullet
