@@ -12,7 +12,7 @@
 }
 
 .dark-background {
-  background-color: #40404080;
+  background-color: #404040;
 }
 
 .transform-center {
@@ -23,6 +23,22 @@
   transition: top 1s linear 0.5s;
   top: 40%;
   /* transition-delay: 0.5s; */
+}
+
+.alix-text-decoration {
+  text-decoration-color: #e8c0a0;
+}
+
+.you-text-decoration {
+  text-decoration-color: #f47560;
+}
+
+.decoration-3 {
+  text-decoration-thickness: 3px;
+}
+
+.width-61ch {
+  width: 61ch;
 }
 
 main {

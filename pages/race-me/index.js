@@ -4,13 +4,8 @@ import ToggleButton from "components/ToggleButton";
 import { useRouter } from "next/router";
 import MyResponsiveLine from "components/LineGraph";
 import { useTheme } from "next-themes";
-
-const INITIAL_WORDS =
-  "Serious inside else memory if six. Whose group through despite cause. Sense peace economy travel. Total financial role together range line beyond its. Policy daughter need kind miss artist truth trouble. Rest human station property. Partner stock four. Region as true develop sound central. Language ball floor meet usually board necessary. Natural sport music white."; // get from BE later
-
-const generate = () => {
-  return "I like ";
-};
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const currentTime = () => new Date().getTime();
 
@@ -28,12 +23,13 @@ const Start = ({ startTime }) => {
 };
 
 const RaceMe = () => {
+  const [corpus, setCorpus] = useState("");
   const [leftPadding, setLeftPadding] = useState(
     new Array(30).fill(" ").join("")
   ); // initial 50 spaces to keep current char at center
   const [outgoingChars, setOutgoingChars] = useState(""); // characters just typed
-  const [currentChar, setCurrentChar] = useState(INITIAL_WORDS.charAt(0));
-  const [incomingChars, setIncomingChars] = useState(INITIAL_WORDS.substr(1)); // next chars to type
+  const [currentChar, setCurrentChar] = useState(corpus.charAt(0));
+  const [incomingChars, setIncomingChars] = useState(corpus.substr(1)); // next chars to type
   const [startTime, setStartTime] = useState(null);
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
@@ -43,14 +39,17 @@ const RaceMe = () => {
   const [incorrectChar, setIncorrectChar] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [alixWpm, setAlixWpm] = useState([]);
+
   const router = useRouter();
   const { theme } = useTheme();
 
   const resetState = () => {
     setLeftPadding(new Array(30).fill(" ").join(""));
     setOutgoingChars("");
-    setCurrentChar(INITIAL_WORDS.charAt(0));
-    setIncomingChars(INITIAL_WORDS.substr(1));
+    setCurrentChar(corpus.charAt(0));
+    setIncomingChars(corpus.substr(1));
     setStartTime(null);
     setWordCount(0);
     setCharCount(0);
@@ -59,6 +58,31 @@ const RaceMe = () => {
     setWpmArray([]);
     setIncorrectChar(false);
   };
+
+  // Fetch Corpus
+  useEffect(() => {
+    const fetchCorpus = async () => {
+      const docRef = doc(
+        db,
+        "corpus",
+        `corpus-${Math.floor(Math.random() * 3) + 1}`
+      );
+
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const words = docSnap.data().words;
+        setCorpus(words);
+        setCurrentChar(words.charAt(0));
+        setIncomingChars(words.substr(1));
+        setAlixWpm(docSnap.data().alix_wpm);
+        setLoading(false);
+      } else {
+        console.error("Error");
+      }
+    };
+
+    fetchCorpus();
+  }, []);
 
   useEffect(() => {
     const timeoutId =
@@ -71,6 +95,7 @@ const RaceMe = () => {
         setWpm(newWpm);
         const newWpmArray = wpmArray;
         newWpmArray.push(newWpm);
+        console.log(newWpmArray);
         setWpmArray(newWpmArray);
       }, 1000);
 
@@ -86,7 +111,7 @@ const RaceMe = () => {
     }
 
     // Don't register any keypresses after time is up
-    if (seconds === 0) {
+    if (seconds === 0 || loading) {
       return;
     }
 
@@ -108,9 +133,9 @@ const RaceMe = () => {
       setCurrentChar(incomingChars.charAt(0));
 
       updatedIncomingChars = incomingChars.substring(1);
-      if (updatedIncomingChars.split(" ").length < 10) {
-        updatedIncomingChars += " " + generate();
-      }
+      // if (updatedIncomingChars.split(" ").length < 10) {
+      //   updatedIncomingChars += " " + generate();
+      // }
       setIncomingChars(updatedIncomingChars);
 
       setCharCount(charCount + 1);
@@ -128,44 +153,10 @@ const RaceMe = () => {
 
   if (!mounted) return null;
 
-  const alix = [
-    "0.00",
-    "77.65",
-    "103.41",
-    "104.50",
-    "114.74",
-    "121.45",
-    "121.18",
-    "118.01",
-    "116.88",
-    "113.58",
-    "106.52",
-    "108.62",
-    "110.37",
-    "111.89",
-    "115.60",
-    "114.36",
-    "116.08",
-    "116.95",
-    "117.70",
-    "117.81",
-    "117.88",
-    "117.96",
-    "120.10",
-    "118.10",
-    "119.12",
-    "119.58",
-    "119.58",
-    "119.57",
-    "119.57",
-    "118.37"
-  ];
-
   return (
     <>
       <ToggleButton />
       <div className="flex-col relative h-screen">
-        {/* <div className="flex items-center justify-center relative h-screen"> */}
         <div className={"absolute top-1/2 left-1/2 transform-center "}>
           <div className="font-mono text-center">
             <svg
@@ -188,15 +179,29 @@ const RaceMe = () => {
             </h3>
             <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
             <h3 className="text-center sm:text-left">Time: {seconds}</h3>
-            <p className="whitespace-pre">
-              <span className="text-gray-400">
-                {(leftPadding + outgoingChars).slice(-30)}
-              </span>
-              <span className={incorrectChar ? "bg-red-400" : "bg-[#FF990080]"}>
-                {currentChar}
-              </span>
-              <span>{incomingChars.substr(0, 30)}</span>
-            </p>
+            {loading ? (
+              <p className="width-61ch whitespace-pre">
+                {" "}
+                <span className="text-gray-400">
+                  {Array(16).fill(" ").join("").slice(-30)}
+                </span>
+                Loading corpus...
+              </p>
+            ) : (
+              <>
+                <p className="whitespace-pre">
+                  <span className="text-gray-400">
+                    {(leftPadding + outgoingChars).slice(-30)}
+                  </span>
+                  <span
+                    className={incorrectChar ? "bg-red-400" : "bg-[#FF990080]"}
+                  >
+                    {currentChar}
+                  </span>
+                  <span>{incomingChars.substr(0, 30)}</span>
+                </p>
+              </>
+            )}
             <Start startTime={startTime} />
             <span
               className={"" + (startTime && "cursor-pointer")}
@@ -228,7 +233,7 @@ const RaceMe = () => {
                       {
                         id: "Alix",
                         color: "hsl(359, 70%, 50%)",
-                        data: alix.map((e, i) => ({ x: i + 1, y: e }))
+                        data: alixWpm.map((e, i) => ({ x: i + 1, y: e }))
                       },
                       {
                         id: "You",
@@ -240,14 +245,26 @@ const RaceMe = () => {
                     theme={theme}
                   />
                 </div>
-                <h3 className="text-left">Your WPM: {wpm}</h3>
-                <h3 className="text-left">
-                  Your accuracy:{" "}
-                  {(
-                    (INITIAL_WORDS.length - errorCount) /
-                    INITIAL_WORDS.length
-                  ).toFixed(2)}
-                </h3>
+                <div className="flex justify-between">
+                  <h3 className="you-text-decoration underline decoration-3">
+                    Your WPM: {wpm}
+                  </h3>
+                  <h3 className="alix-text-decoration underline decoration-3">
+                    Alix's WPM: {alixWpm[alixWpm.length - 1]}
+                  </h3>
+                </div>
+                <div className="flex justify-between mb-8">
+                  <h3 className="you-text-decoration underline decoration-3">
+                    Your accuracy:{" "}
+                    {((corpus.length - errorCount) / corpus.length).toFixed(2)}
+                  </h3>
+                  <h3 className="alix-text-decoration underline decoration-3">
+                    Alix's accuracy: 1.00
+                  </h3>
+                </div>
+                {/* <div>
+                  <h3>Leaderboard</h3>
+                </div> */}
               </div>
             )}
           </div>
