@@ -33,13 +33,20 @@ export default function ProjectsCard() {
           <h1 className="text-5xl whitespace-nowrap mb-4">Projects</h1>
           <div className="flex flex-wrap justify-center md:justify-start">
             <ProjectCard
+              name="Race me"
+              description="A page on my personal website that allows users to compare their typing abilities to mine."
+              technologies={["Next.js", "TailwindCSS", "Firebase"]}
+              github="https://github.com/acui51/personal-website"
+              gif="/telehistorydemo.gif"
+            />
+            <ProjectCard
               name="Telehistory"
               description="A web app that charts and analyzes data from your chat history on the popular messaging app, Telegram."
               technologies={[
                 "Next.js",
                 "TypeScript",
                 "TailwindCSS",
-                "Nivo Graphs",
+                "Nivo Graphs"
               ]}
               github="https://github.com/acui51/telehistory-v2.1"
               gif="/telehistorydemo.gif"
@@ -53,7 +60,7 @@ export default function ProjectsCard() {
                 "TypeScript",
                 "Node.js",
                 "MongoDB",
-                "Firebase",
+                "Firebase"
               ]}
               github="https://github.com/acui51/ali-site"
               gif="/alidemo.gif"

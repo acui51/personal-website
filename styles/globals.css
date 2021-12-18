@@ -15,14 +15,23 @@
   background-color: #404040;
 }
 
-.transform-center {
-  transform: translate(-50%, -50%);
+/* .transform-center {
+    transform: translate(-50%, -50%);
+} */
+
+@media (min-width: 640px) {
+  .transform-center {
+    transform: translate(-50%, -50%);
+  }
+
+  .translate-x-negative-1-2 {
+    transform: translate(-50%);
+  }
 }
 
 .transition-top {
   transition: top 1s linear 0.5s;
   top: 40%;
-  /* transition-delay: 0.5s; */
 }
 
 .alix-text-decoration {
@@ -39,6 +48,14 @@
 
 .width-61ch {
   width: 61ch;
+}
+
+.width-5ch {
+  width: 5ch;
+}
+
+.top-1-8 {
+  top: 12.5%;
 }
 
 main {

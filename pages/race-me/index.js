@@ -39,8 +39,9 @@ const RaceMe = () => {
   const [incorrectChar, setIncorrectChar] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [alixWpm, setAlixWpm] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
 
   const router = useRouter();
   const { theme } = useTheme();
@@ -62,23 +63,38 @@ const RaceMe = () => {
   // Fetch Corpus
   useEffect(() => {
     const fetchCorpus = async () => {
-      const docRef = doc(
-        db,
-        "corpus",
-        `corpus-${Math.floor(Math.random() * 3) + 1}`
-      );
+      // const docRef = doc(
+      //   db,
+      //   "corpus",
+      //   `corpus-${Math.floor(Math.random() * 3) + 1}`
+      // );
 
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const words = docSnap.data().words;
-        setCorpus(words);
-        setCurrentChar(words.charAt(0));
-        setIncomingChars(words.substr(1));
-        setAlixWpm(docSnap.data().alix_wpm);
-        setLoading(false);
-      } else {
-        console.error("Error");
-      }
+      // const docSnap = await getDoc(docRef);
+      // if (docSnap.exists()) {
+      //   const words = docSnap.data().words;
+      //   setCorpus(words);
+      //   setCurrentChar(words.charAt(0));
+      //   setIncomingChars(words.substr(1));
+      //   setAlixWpm(docSnap.data().alix_wpm);
+      //   setLeaderboard(
+      //     docSnap
+      //       .data()
+      //       .leaderboard.sort((a, b) => a.adjusted_wpm > b.adjusted_wpm)
+      //   );
+      //   setLoading(false);
+      // } else {
+      //   console.error("Error");
+      // }
+      const words =
+        "Language ball floor meet usually board necessary. Natural sport music white. Natural explain before something first drug contain start. Party prevent live. Quickly candidate change although. Together type music hospital. Every speech support time operation wear often. Manage political record word group food break. Picture suddenly drug rule bring determine some forward.";
+      setCorpus(words);
+      setCurrentChar(words.charAt(0));
+      setIncomingChars(words.substr(1));
+      setAlixWpm([
+        123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123,
+        123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123,
+        123, 123
+      ]);
     };
 
     fetchCorpus();
@@ -95,7 +111,6 @@ const RaceMe = () => {
         setWpm(newWpm);
         const newWpmArray = wpmArray;
         newWpmArray.push(newWpm);
-        console.log(newWpmArray);
         setWpmArray(newWpmArray);
       }, 1000);
 
@@ -133,9 +148,7 @@ const RaceMe = () => {
       setCurrentChar(incomingChars.charAt(0));
 
       updatedIncomingChars = incomingChars.substring(1);
-      // if (updatedIncomingChars.split(" ").length < 10) {
-      //   updatedIncomingChars += " " + generate();
-      // }
+
       setIncomingChars(updatedIncomingChars);
 
       setCharCount(charCount + 1);
@@ -157,7 +170,14 @@ const RaceMe = () => {
     <>
       <ToggleButton />
       <div className="flex-col relative h-screen">
-        <div className={"absolute top-1/2 left-1/2 transform-center "}>
+        <div
+          className={
+            "sm:absolute sm:left-1/2 " +
+            (seconds === 0
+              ? "top-1-8 translate-y-0 translate-x-negative-1-2"
+              : "sm:top-1/2 transform-center")
+          }
+        >
           <div className="font-mono text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +246,7 @@ const RaceMe = () => {
               </svg>
             </span>
             {seconds === 0 && (
-              <div className="font-mono">
+              <div className="font-mono px-4 sm:px-0">
                 <div className="h-64">
                   <MyResponsiveLine
                     data={[
@@ -262,9 +282,45 @@ const RaceMe = () => {
                     Alix's accuracy: 1.00
                   </h3>
                 </div>
-                {/* <div>
+                <div>
                   <h3>Leaderboard</h3>
-                </div> */}
+                  {leaderboard.map((user, i) => {
+                    return (
+                      <h3 className="text-left" key={i}>
+                        {i + 1}. {user.user}: {user.adjusted_wpm} WPM
+                      </h3>
+                    );
+                  })}
+                  {/* {wpm > 0 ? (
+                    <>
+                      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div className="relative w-auto my-6 mx-auto px-3">
+                          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none items-center">
+                            <div className="mt-4 mb-2">
+                              Enter your name to be put on the leaderboard
+                            </div>
+                            <input className="width-5ch border border-black dark:border-white text-center mb-2"></input>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-6 w-6 ml-auto mr-auto mb-4 hover:bg-[#FF990080] cursor-pointer"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7l4-4m0 0l4 4m-4-4v18"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="opacity-25 fixed inset-0 z-40 bg-black w-screen"></div>
+                    </>
+                  ) : null} */}
+                </div>
               </div>
             )}
           </div>
