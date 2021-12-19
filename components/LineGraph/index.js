@@ -7,7 +7,7 @@ const ChartTooltip = ({ point, theme }) => {
     <div
       className={
         "flex flex-col items-center p-1 rounded-md " +
-        (theme === "dark" ? "dark-background" : "bg-gray-0")
+        (theme === "dark" ? "dark-background" : "bg-gray-50")
       }
     >
       <div className="flex items-center">
