@@ -22,7 +22,10 @@ export default function ProjectsCard() {
     <div className="flex flex-col items-center justify-center py-2 px-4">
       <Head>
         <title>Projects</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href={theme === "light" ? "/mountain.png" : "/volcano.png"}
+        />
       </Head>
       <ToggleButton />
       <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">

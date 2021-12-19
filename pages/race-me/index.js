@@ -9,6 +9,7 @@ import { doc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useIsSm } from "../../hooks/useMediaQuery";
 import Filter from "bad-words";
 import Loader from "react-loader-spinner";
+import Head from "next/head";
 
 const currentTime = () => new Date().getTime();
 
@@ -198,6 +199,13 @@ const RaceMe = () => {
 
   return (
     <>
+      <Head>
+        <title>Experience</title>
+        <link
+          rel="icon"
+          href={theme === "light" ? "/mountain.png" : "/volcano.png"}
+        />
+      </Head>
       <ToggleButton />
       <div className="flex items-center justify-center relative h-screen">
         <div className="font-mono text-center">

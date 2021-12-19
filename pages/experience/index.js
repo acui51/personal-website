@@ -21,7 +21,10 @@ const Experience = () => {
     <div className="flex flex-col items-center justify-center py-2 px-4">
       <Head>
         <title>Experience</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href={theme === "light" ? "/mountain.png" : "/volcano.png"}
+        />
       </Head>
       <ToggleButton />
       <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">
@@ -50,14 +53,14 @@ const Experience = () => {
               "RSpec",
               "Python",
               "Selenium",
-              "AWS suite",
+              "AWS suite"
             ]}
             description={[
               "Created the entire front-end of an internal tool that lets PMs and engineers grant API and Console permissions of varying degrees to multiple EC2 users at once.",
               "Conducted user interviews, created mock ups in Figma, and polled project stakeholders weekly to ensure design aligned with user needs.",
               "Developed the entire front-end using Ruby on Rails for templating HTML, jQuery for dynamic client-side logic, and SCSS for styling and responsiveness.",
               "Wrote unit and integration tests with RSpec, Python and Selenium with 90% code coverage percentage.",
-              "Contributed to the implementation of a Slackbot notification system using AWS suite (SNS, Chatbot, CloudMetrics).",
+              "Contributed to the implementation of a Slackbot notification system using AWS suite (SNS, Chatbot, CloudMetrics)."
             ]}
             color="rgb(255, 153, 0)"
           />
@@ -69,7 +72,7 @@ const Experience = () => {
               "Engineered the new author byline and author bio components used across almost every article using Next.js and Storybook.",
               "Created an author follow module that lets users receive notifications every time an article by the given author is published.",
               "Wrote unit tests using Jest and Enzyme and end-to-end tests using Cypress to maintain 80% code coverage.",
-              "Worked in agile development following scrum methodologies.",
+              "Worked in agile development following scrum methodologies."
             ]}
             technologies={["Next.js", "Jest", "Enzyme", "Cypress", "Storybook"]}
             dates="Mar 2021 - June 2021"
@@ -82,13 +85,13 @@ const Experience = () => {
               "Converted a logic courseware application to a newly improved web-based application using the MVC design pattern",
               "Refashioned the model component of the design pattern by serializing data from the backend into abstracted components",
               "Integrated REST API endpoints with Java using Jersey",
-              "Migrated from Bootstrap V3 to Bootstrap V4 with a complete responsive redesign of the application chrome",
+              "Migrated from Bootstrap V3 to Bootstrap V4 with a complete responsive redesign of the application chrome"
             ]}
             technologies={[
               "JavaScript (ES6)",
               "jQuery",
               "Java",
-              "Subversion SVN",
+              "Subversion SVN"
             ]}
             dates="Jun 2020 - April 2021"
           />
@@ -106,7 +109,7 @@ const Experience = () => {
               >
                 {" "}
                 Carta V2{" "}
-              </a>,
+              </a>
             ]}
             technologies={["React", "Redux", "TypeScript", "Storybook"]}
             dates="Sep 2020 - Present"
