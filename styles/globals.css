@@ -15,10 +15,6 @@
   background-color: #404040;
 }
 
-/* .transform-center {
-    transform: translate(-50%, -50%);
-} */
-
 @media (min-width: 640px) {
   .transform-center {
     transform: translate(-50%, -50%);
@@ -46,8 +42,14 @@
   text-decoration-thickness: 3px;
 }
 
-.width-61ch {
-  width: 61ch;
+.width-race-me-text {
+  width: 51ch;
+}
+
+@media (min-width: 640px) {
+  .width-race-me-text {
+    width: 61ch;
+  }
 }
 
 .width-5ch {
