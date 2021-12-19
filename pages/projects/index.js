@@ -37,7 +37,7 @@ export default function ProjectsCard() {
               description="A page on my personal website that allows users to compare their typing abilities to mine."
               technologies={["Next.js", "TailwindCSS", "Firebase"]}
               github="https://github.com/acui51/personal-website"
-              gif="/telehistorydemo.gif"
+              gif="/race-me.gif"
             />
             <ProjectCard
               name="Telehistory"
