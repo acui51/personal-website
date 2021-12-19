@@ -5,7 +5,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 
-const ProjectCard = ({ technologies, name, description, github, gif }) => {
+const ProjectCard = ({ technologies, name, github, gif, children }) => {
   const { theme } = useTheme();
   const router = useRouter();
 
@@ -29,7 +29,7 @@ const ProjectCard = ({ technologies, name, description, github, gif }) => {
       />
       <div className="p-3">
         <h1 className="text-xl font-medium">{name}</h1>
-        <p>{description}</p>
+        {children}
         <div className="flex flex-wrap">
           {technologies &&
             technologies.map((technology, i) => (

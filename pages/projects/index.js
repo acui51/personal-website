@@ -7,10 +7,12 @@ import Bubble2 from "assets/svg-js/Bubble2";
 import MeProjects from "assets/svg-js/MeProjects";
 import ProjectCard from "./components/ProjectCard";
 import Footer from "components/Footer";
+import { useRouter } from "next/router";
 
 export default function ProjectsCard() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const router = useRouter();
 
   useEffect(() => setMounted(true), []);
 
@@ -34,14 +36,27 @@ export default function ProjectsCard() {
           <div className="flex flex-wrap justify-center md:justify-start">
             <ProjectCard
               name="Race me"
-              description="A page on my personal website that allows users to compare their typing abilities to mine."
               technologies={["Next.js", "TailwindCSS", "Firebase"]}
               github="https://github.com/acui51/personal-website"
               gif="/race-me.gif"
-            />
+            >
+              <p>
+                A{" "}
+                <a
+                  className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push("/race-me");
+                  }}
+                >
+                  page
+                </a>{" "}
+                on my personal website that allows users to compare their typing
+                abilities to mine.
+              </p>
+            </ProjectCard>
             <ProjectCard
               name="Telehistory"
-              description="A web app that charts and analyzes data from your chat history on the popular messaging app, Telegram."
               technologies={[
                 "Next.js",
                 "TypeScript",
@@ -50,10 +65,14 @@ export default function ProjectsCard() {
               ]}
               github="https://github.com/acui51/telehistory-v2.1"
               gif="/telehistorydemo.gif"
-            />
+            >
+              <p>
+                A web app that charts and analyzes data from your chat history
+                on the popular messaging app, Telegram.
+              </p>
+            </ProjectCard>
             <ProjectCard
               name="Applied Learning Initiative"
-              description="A web app that allows students to find research opportunities with various PIs."
               technologies={[
                 "React.js",
                 "Redux",
@@ -64,14 +83,23 @@ export default function ProjectsCard() {
               ]}
               github="https://github.com/acui51/ali-site"
               gif="/alidemo.gif"
-            />
+            >
+              <p>
+                A web app that allows students to find research opportunities
+                with various PIs.
+              </p>
+            </ProjectCard>
             <ProjectCard
               name="Sprout"
-              description="A hi-fidelity prototype for an app that allows creators to train together sounds and connect effortlessly."
               technologies={["React Native", "Expo", "Firebase"]}
               github="https://github.com/acui51/sprout-app"
               gif="/sproutdemo.gif"
-            />
+            >
+              <p>
+                A hi-fidelity prototype for an app that allows creators to train
+                together sounds and connect effortlessly.
+              </p>
+            </ProjectCard>
           </div>
         </div>
         <div className="self-center mt-4 md:self-start md:ml-4 md:mt-16">

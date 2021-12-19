@@ -28,13 +28,19 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-screen py-2 px-4">
       <Head>
         <title>Alix Cui</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href={theme === "light" ? "/mountain.png" : "/volcano.png"}
+        />
         <meta property="og:title" content="Alix Cui's Personal Website" />
         <meta
           property="og:description"
           content="A place that displays my experience and various projects."
         />
-        <meta property="og:image" content={"/preview.png"} />
+        <meta
+          property="og:image"
+          content="https://drive.google.com/file/d/1Z43CKCP7CN6aKdrx0NcTcPVDvs7TqtY_/view?usp=sharing"
+        />
       </Head>
       <ToggleButton />
       <main className="h-screen flex flex-col md:align-center md:justify-center w-full md:w-8/12 relative">
@@ -53,7 +59,7 @@ export default function Home() {
               front-end internship experience at Amazon Web Services and The
               Washington Post. I will be joining Stripe next summer as a
               software engineer intern. Sometimes, I enjoy taking typing tests.
-              You can race me{" "}
+              Race me{" "}
               <a
                 className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
                 onClick={() => router.push("/race-me")}
