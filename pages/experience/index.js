@@ -25,6 +25,16 @@ const Experience = () => {
           rel="icon"
           href={theme === "light" ? "/mountain.png" : "/volcano.png"}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="icon"
+          href={theme === "light" ? "/mountain.png" : "/volcano.png"}
+        />
       </Head>
       <ToggleButton />
       <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">
@@ -36,11 +46,31 @@ const Experience = () => {
           <Breadcrumb />
           <h1 className="text-5xl whitespace-nowrap mb-4">Experience</h1>
           <ExperienceBullet
+            company="Glean"
+            occupation="Software Engineer Intern"
+            dates="Mar 2022 - Jun 2022"
+            description={["Product engineering", "Having fun at a startup 🚀"]}
+            color={theme === "light" ? "#333CED" : "#FFFFFF"}
+          />
+          <ExperienceBullet
             company="Stripe"
             occupation="Software Engineer Intern"
             dates="Jun 2022 - Sep 2022"
             description={["Incoming Summer 2022"]}
             color="#5433FF"
+          />
+          <ExperienceBullet
+            company="Stanford"
+            occupation="Co-Instructor"
+            dates="Jan 2022 - Mar 2022"
+            description={[
+              "Co-led and taught Stanford's CS47: Cross-platform Mobile App Development in React Native.",
+              "Gave lectures on React Native topics such as JavaScript basics, hooks, and React Navigation.",
+              "Created two new assignments from scratch.",
+              "Held weekly office hours."
+            ]}
+            technologies={["React Native", "Expo"]}
+            color="#B83A4B"
           />
           <ExperienceBullet
             company="Amazon Web Services"

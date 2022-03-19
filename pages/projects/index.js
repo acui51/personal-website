@@ -26,6 +26,10 @@ export default function ProjectsCard() {
           rel="icon"
           href={theme === "light" ? "/mountain.png" : "/volcano.png"}
         />
+        <link
+          rel="icon"
+          href={theme === "light" ? "/mountain.png" : "/volcano.png"}
+        />
       </Head>
       <ToggleButton />
       <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">

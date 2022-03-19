@@ -7,7 +7,7 @@ const ExperienceBullet = ({
   occupation,
   dates,
   color,
-  company,
+  company
 }) => {
   const descriptionList =
     description &&
