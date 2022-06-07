@@ -57,9 +57,15 @@ export default function Home() {
             <p className="mb-3 text-gray-600 dark:text-gray-200">
               I'm currently a junior at Stanford University with recent
               front-end internship experience at Amazon Web Services and The
-              Washington Post. I will be joining Stripe next summer as a
-              software engineer intern. Sometimes, I enjoy taking typing tests.
-              Race me{" "}
+              Washington Post. I'm currently interning at{" "}
+              <a
+                className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
+                href="http://glean.com/"
+              >
+                Glean
+              </a>{" "}
+              on the product engineering team. Sometimes, I enjoy taking typing
+              tests. Race me{" "}
               <a
                 className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
                 onClick={() => router.push("/race-me")}
