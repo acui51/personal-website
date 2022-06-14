@@ -50,7 +50,22 @@ const Experience = () => {
             occupation="Software Engineer Intern"
             dates="Mar 2022 - "
             description={["Product engineering", "Having fun at a startup 🚀"]}
-            color={theme === "light" ? "#333CED" : "#FFFFFF"}
+            color={theme === "light" ? "#333CED" : "#FFFFFFE6"}
+            technologies={[
+              "React",
+              "TypeScript",
+              "Redux",
+              "Vanilla Extract",
+              "Webpack",
+              "Go"
+            ]}
+          />
+          <ExperienceBullet
+            company="Kleiner Perkins"
+            occupation="Engineering Fellow"
+            dates="Jun 2022 - "
+            description={["Fellowship"]}
+            color={theme === "light" ? "#000000" : "#FFFFFFE6"}
           />
           <ExperienceBullet
             company="Stanford"
