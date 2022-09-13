@@ -48,8 +48,15 @@ const Experience = () => {
           <ExperienceBullet
             company="Glean"
             occupation="Software Engineer Intern"
-            dates="Mar 2022 - "
-            description={["Product engineering", "Having fun at a startup 🚀"]}
+            dates="Mar 2022 - Sep 2022"
+            description={[
+              "Reduced search latency from the new tab page by 300ms on average by reprioritzing the data request and firing it in parallel with results page startup",
+              "Cut root bundlesize by 10% through a process of dynamic importing, lazy-loading, and Webpack optimizations",
+              "Developed an entirely new page for product updates that utilizes Contentful CMS to serve content",
+              "Full stack development for our people and directory product utilizing Go, React, and TypeScript",
+              "Improved the consistency and robustness of our design system by utilizing Storybook and better categorizing our components in the codebase",
+              "Met some of the most talented, nicest, and funniest engineers ever 😄"
+            ]}
             color={theme === "light" ? "#333CED" : "#FFFFFFE6"}
             technologies={[
               "React",
