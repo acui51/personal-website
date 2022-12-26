@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Breadcrumb from "components/Breadcrumb";
 import ToggleButton from "components/ToggleButton";
-import Me from "assets/svg-js/Me";
 import {
   AiFillGithub,
   AiFillFilePdf,
   AiFillLinkedin,
-  AiFillMail
+  AiFillMail,
 } from "react-icons/ai";
 import Bubble2 from "assets/svg-js/Bubble2";
 import { useTheme } from "next-themes";
@@ -55,17 +54,9 @@ export default function Home() {
               Hi, I'm Alix {theme === "light" ? "⛰" : "🌋"}
             </h1>
             <p className="mb-3 text-gray-600 dark:text-gray-200">
-              I'm currently a junior at Stanford University with recent
-              front-end internship experience at Amazon Web Services and The
-              Washington Post. I'm currently interning at{" "}
-              <a
-                className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
-                href="http://glean.com/"
-              >
-                Glean
-              </a>{" "}
-              on the product engineering team. Sometimes, I enjoy taking typing
-              tests. Race me{" "}
+              I'm currently a senior at Stanford University with recent
+              engineering experience at Glean, Amazon Web Services, and The
+              Washington Post. Sometimes, I enjoy taking typing tests. Race me{" "}
               <a
                 className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
                 onClick={() => router.push("/race-me")}

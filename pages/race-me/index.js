@@ -77,7 +77,6 @@ const RaceMe = () => {
 
   const postLeaderboard = async () => {
     let filter = new Filter();
-    filter.addWords("gay");
     if (filter.isProfane(inputEl.current.value)) {
       setProfanityDetected(true);
       return;
@@ -87,7 +86,7 @@ const RaceMe = () => {
     const newLeaderboard = leaderboard;
     newLeaderboard.push({
       adjusted_wpm: parseFloat(wpm),
-      user: inputEl.current.value
+      user: inputEl.current.value,
     });
     newLeaderboard.sort((a, b) => {
       if (a.adjusted_wpm > b.adjusted_wpm) {
@@ -97,7 +96,7 @@ const RaceMe = () => {
       }
     });
     await updateDoc(doc(db, "corpus", `corpus-${corpusId}`), {
-      leaderboard: newLeaderboard.slice(0, 5)
+      leaderboard: newLeaderboard.slice(0, 5),
     });
     setSubmitLeaderboardLoading(true);
     setShowLeaderboardSubmission(false);
@@ -229,6 +228,7 @@ const RaceMe = () => {
           </h3>
           <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
           <h3 className="text-center sm:text-left">Time: {seconds}</h3>
+          {/* <input type="text" className="border-green-100 border-2" /> */}
           {loading ? (
             <p className="whitespace-pre width-race-me-text">
               {" "}
@@ -244,9 +244,18 @@ const RaceMe = () => {
                   {(leftPadding + outgoingChars).slice(isSm ? -25 : -30)}
                 </span>
                 <span
-                  className={incorrectChar ? "bg-red-400" : "bg-[#FF990080]"}
+                  className={`${
+                    incorrectChar ? "bg-red-400" : "bg-[#FF990080]"
+                  } relative`}
                 >
                   {currentChar}
+                  {isSm && (
+                    <input
+                      type="text"
+                      className="absolute opacity-0"
+                      maxLength={1}
+                    />
+                  )}
                 </span>
                 <span>{incomingChars.substr(0, isSm ? 25 : 30)}</span>
               </p>
@@ -283,12 +292,12 @@ const RaceMe = () => {
                     {
                       id: "Alix",
                       color: "hsl(359, 70%, 50%)",
-                      data: alixWpm.map((e, i) => ({ x: i + 1, y: e }))
+                      data: alixWpm.map((e, i) => ({ x: i + 1, y: e })),
                     },
                     {
                       id: "You",
-                      data: wpmArray.map((e, i) => ({ x: i + 1, y: e }))
-                    }
+                      data: wpmArray.map((e, i) => ({ x: i + 1, y: e })),
+                    },
                   ]}
                   axisLeftName="WPM"
                   axisBottomName="time"
