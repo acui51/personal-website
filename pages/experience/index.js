@@ -37,7 +37,7 @@ const Experience = () => {
         />
       </Head>
       <ToggleButton />
-      <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">
+      <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative max-w-7xl">
         <div className="relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"

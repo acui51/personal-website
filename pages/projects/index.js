@@ -32,7 +32,7 @@ export default function ProjectsCard() {
         />
       </Head>
       <ToggleButton />
-      <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative">
+      <main className="flex flex-col md:flex-row justify-center w-full md:w-8/12 relative max-w-7xl">
         <div className="relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"
@@ -68,7 +68,7 @@ export default function ProjectsCard() {
                 "Next.js",
                 "TypeScript",
                 "TailwindCSS",
-                "Nivo Graphs"
+                "Nivo Graphs",
               ]}
               github="https://github.com/acui51/telehistory-v2.1"
               gif="/telehistorydemo.gif"
@@ -86,7 +86,7 @@ export default function ProjectsCard() {
                 "TypeScript",
                 "Node.js",
                 "MongoDB",
-                "Firebase"
+                "Firebase",
               ]}
               github="https://github.com/acui51/ali-site"
               gif="/alidemo.gif"

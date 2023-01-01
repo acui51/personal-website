@@ -42,7 +42,7 @@ export default function Home() {
         />
       </Head>
       <ToggleButton />
-      <main className="h-screen flex flex-col md:align-center md:justify-center w-full md:w-8/12 relative">
+      <main className="h-screen flex flex-col md:align-center md:justify-center w-full md:w-8/12 relative max-w-7xl">
         <section className="flex flex-col md:flex-row gap-2 relative">
           <Bubble2
             className="absolute z-[-1] -left-24 -top-20"
