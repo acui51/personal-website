@@ -54,6 +54,7 @@ const RaceMe = () => {
   const [submitLeaderboardLoading, setSubmitLeaderboardLoading] =
     useState(false);
   const [corpusId, _setCorpusId] = useState(Math.floor(Math.random() * 3) + 1);
+  const inputRef = useRef();
 
   const router = useRouter();
   const { theme } = useTheme();
@@ -194,6 +195,12 @@ const RaceMe = () => {
 
   useEffect(() => setMounted(true), []);
 
+  const handleTextClick = () => {
+    if (isSm && inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   if (!mounted) return null;
 
   return (
@@ -228,7 +235,6 @@ const RaceMe = () => {
           </h3>
           <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
           <h3 className="text-center sm:text-left">Time: {seconds}</h3>
-          {/* <input type="text" className="border-green-100 border-2" /> */}
           {loading ? (
             <p className="whitespace-pre width-race-me-text">
               {" "}
@@ -239,25 +245,28 @@ const RaceMe = () => {
             </p>
           ) : (
             <>
-              <p className="whitespace-pre width-race-me-text">
+              <p className="whitespace-pre width-race-me-text w-screen justify-center flex">
                 <span className="text-gray-400">
                   {(leftPadding + outgoingChars).slice(isSm ? -25 : -30)}
                 </span>
                 <span
                   className={`${
                     incorrectChar ? "bg-red-400" : "bg-[#FF990080]"
-                  } relative`}
+                  } relative flex justify-center`}
+                  onClick={handleTextClick}
                 >
-                  {currentChar}
+                  {/* Hack for iOS mobile because empty space is rendered as empty string? */}
+                  {currentChar === " " ? <span>&nbsp;</span> : currentChar}
                   {isSm && (
                     <input
-                      type="text"
-                      className="absolute opacity-0"
-                      maxLength={1}
+                      className="border-none cursor-default opacity-0 outline-none pointer-events-none absolute z-[-1] resize-none select-none"
+                      ref={inputRef}
                     />
                   )}
                 </span>
-                <span>{incomingChars.substr(0, isSm ? 25 : 30)}</span>
+                <span onClick={handleTextClick}>
+                  {incomingChars.substr(0, isSm ? 25 : 30)}
+                </span>
               </p>
             </>
           )}

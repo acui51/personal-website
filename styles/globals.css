@@ -43,7 +43,7 @@
 }
 
 .width-race-me-text {
-  width: 51ch;
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {
