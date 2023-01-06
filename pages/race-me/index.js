@@ -106,6 +106,7 @@ const RaceMe = () => {
   // Fetch corpus
   useEffect(() => {
     const fetchCorpus = async () => {
+      setLoading(true);
       const docRef = doc(db, "corpus", `corpus-${corpusId}`);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -117,6 +118,7 @@ const RaceMe = () => {
       } else {
         console.error("Error");
       }
+      setLoading(false);
     };
 
     fetchCorpus();
