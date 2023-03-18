@@ -11,7 +11,7 @@ const ProjectCard = ({ technologies, name, github, gif, children }) => {
 
   return (
     <div
-      className="w-72 h-108 rounded-2xl shadow-lg bg-white relative mr-4 mb-4 cursor-pointer dark:text-gray-200
+      className="w-64 h-108 rounded-2xl shadow-lg bg-white relative mr-4 mb-4 cursor-pointer dark:text-gray-200
       transition duration-200 ease-in-out transform hover:scale-105"
       style={{ backgroundColor: theme === "dark" && "#2C2C2C" }}
       onClick={() => router.push(github)}

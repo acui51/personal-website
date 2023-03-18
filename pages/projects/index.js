@@ -42,6 +42,30 @@ export default function ProjectsCard() {
           <h1 className="text-5xl whitespace-nowrap mb-4">Projects</h1>
           <div className="flex flex-wrap justify-center md:justify-start">
             <ProjectCard
+              name="Hubble"
+              technologies={["Next.js", "Typescript", "Supabase", "OpenAI"]}
+              github="https://hubble-waitlist.vercel.app/"
+              gif="/hubble.png"
+            >
+              Making your housing search easier by aggregating and automating
+              the process with our nifty dashboard and Chrome extension.
+            </ProjectCard>
+            <ProjectCard
+              name="Storytracker"
+              technologies={[
+                "Next.js",
+                "Typescript",
+                "Hugging Face",
+                "Supabase",
+              ]}
+              github="https://github.com/acui51/homepage-compare"
+              gif="/storytracker.png"
+            >
+              <p>
+                A neat way to compare newsroom homepages using scraping and AI.
+              </p>
+            </ProjectCard>
+            <ProjectCard
               name="Race me"
               technologies={["Next.js", "TailwindCSS", "Firebase"]}
               github="https://github.com/acui51/personal-website"
