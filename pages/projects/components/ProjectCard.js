@@ -25,6 +25,7 @@ const ProjectCard = ({ technologies, name, github, gif, children }) => {
         width={300}
         height={128}
         layout="responsive"
+        objectFit="cover"
         className="rounded-t-2xl"
       />
       <div className="p-3">

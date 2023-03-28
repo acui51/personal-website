@@ -42,6 +42,15 @@ export default function ProjectsCard() {
           <h1 className="text-5xl whitespace-nowrap mb-4">Projects</h1>
           <div className="flex flex-wrap justify-center md:justify-start">
             <ProjectCard
+              name="rizzGPT"
+              technologies={["Next.js", "GPT", "Whisper", "Brilliant Monocle"]}
+              github="https://twitter.com/bryanhpchiang/status/1639830383616487426"
+              gif="/rizzgpt.jpeg"
+            >
+              Real-time Charisma as a Service (CaaS) that listens to your
+              conversation and tells you exactly what to say next.
+            </ProjectCard>
+            <ProjectCard
               name="Hubble"
               technologies={["Next.js", "Typescript", "Supabase", "OpenAI"]}
               github="https://hubble-waitlist.vercel.app/"
