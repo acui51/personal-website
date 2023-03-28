@@ -44,7 +44,7 @@ export default function ProjectsCard() {
             <ProjectCard
               name="rizzGPT"
               technologies={["Next.js", "GPT", "Whisper", "Brilliant Monocle"]}
-              github="https://twitter.com/bryanhpchiang/status/1639830383616487426"
+              github="https://github.com/acui51/monocle-rizz"
               gif="/rizzgpt.jpeg"
             >
               Real-time Charisma as a Service (CaaS) that listens to your
