@@ -10,6 +10,9 @@ import { useIsSm } from "../../hooks/useMediaQuery";
 import Filter from "bad-words";
 import Loader from "react-loader-spinner";
 import Head from "next/head";
+import useBodyKeyPress from "hooks/useBodyKeyPress";
+import BodyRace from "components/BodyRace";
+import Script from "next/script";
 
 const currentTime = () => new Date().getTime();
 
@@ -49,6 +52,8 @@ const RaceMe = () => {
   const [alixWpm, setAlixWpm] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [profanityDetected, setProfanityDetected] = useState(false);
+  const [isBodyRace, setIsBodyRace] = useState(false);
+  const [currBodyRaceChar, setCurrBodyRaceChar] = useState("");
   const [showLeaderboardSubmission, setShowLeaderboardSubmission] =
     useState(true);
   const [submitLeaderboardLoading, setSubmitLeaderboardLoading] =
@@ -58,6 +63,11 @@ const RaceMe = () => {
 
   const router = useRouter();
   const { theme } = useTheme();
+
+  const dbToPost = isBodyRace ? "body-corpus" : "corpus";
+  const colToPost = isBodyRace
+    ? `body-corpus-${corpusId}`
+    : `corpus-${corpusId}`;
 
   const resetState = () => {
     setLeftPadding(new Array(isSm ? 25 : 30).fill(" ").join(""));
@@ -96,7 +106,8 @@ const RaceMe = () => {
         return 1;
       }
     });
-    await updateDoc(doc(db, "corpus", `corpus-${corpusId}`), {
+
+    await updateDoc(doc(db, dbToPost, colToPost), {
       leaderboard: newLeaderboard.slice(0, 5),
     });
     setSubmitLeaderboardLoading(true);
@@ -107,7 +118,8 @@ const RaceMe = () => {
   useEffect(() => {
     const fetchCorpus = async () => {
       setLoading(true);
-      const docRef = doc(db, "corpus", `corpus-${corpusId}`);
+
+      const docRef = doc(db, dbToPost, colToPost);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const words = docSnap.data().words;
@@ -122,16 +134,16 @@ const RaceMe = () => {
     };
 
     fetchCorpus();
-  }, []);
+  }, [isBodyRace]);
 
   // Snapshot the leaderboard
   useEffect(() => {
-    const docRef = doc(db, "corpus", `corpus-${corpusId}`);
+    const docRef = doc(db, dbToPost, colToPost);
     return onSnapshot(docRef, (doc) => {
       setLeaderboard(doc.data().leaderboard);
       setLoading(false);
     });
-  }, [db]);
+  }, [db, isBodyRace]);
 
   useEffect(() => {
     const timeoutId =
@@ -151,6 +163,52 @@ const RaceMe = () => {
       clearTimeout(timeoutId);
     };
   }, [seconds, startTime]);
+
+  useBodyKeyPress((key) => {
+    // Do nothing if we aren't body racing
+    if (!isBodyRace) {
+      return;
+    }
+
+    if (!startTime) {
+      setStartTime(currentTime);
+    }
+
+    if (seconds === 0 || loading) {
+      return;
+    }
+
+    let updatedOutgoingChars = outgoingChars;
+    let updatedIncomingChars = incomingChars;
+
+    if (key === currentChar) {
+      setIncorrectChar(false);
+      // For the first 20 characters, move leftPadding forward
+      if (leftPadding.length > 0) {
+        setLeftPadding(leftPadding.substring(1));
+      }
+
+      // Current char is now in outgoing chars
+      updatedOutgoingChars += currentChar;
+      setOutgoingChars(updatedOutgoingChars);
+
+      // Current char is now the next letter
+      setCurrentChar(incomingChars.charAt(0));
+
+      updatedIncomingChars = incomingChars.substring(1);
+
+      setIncomingChars(updatedIncomingChars);
+
+      setCharCount(charCount + 1);
+
+      if (incomingChars.charAt(0) === " ") {
+        setWordCount(wordCount + 1);
+      }
+    } else {
+      setIncorrectChar(true);
+      setErrorCount(errorCount + 1);
+    }
+  }, currBodyRaceChar);
 
   useKeyPress((key) => {
     // Start the timer
@@ -208,13 +266,38 @@ const RaceMe = () => {
   return (
     <>
       <Head>
-        <title>Experience</title>
+        <title>Race me</title>
         <link
           rel="icon"
           href={theme === "light" ? "/mountain.png" : "/volcano.png"}
         />
+        <script
+          src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js"
+          crossorigin="anonymous"
+        ></script>
       </Head>
       <ToggleButton />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils_3d/control_utils_3d.js"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+        crossOrigin="anonymous"
+      />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"
+        crossOrigin="anonymous"
+      />
+      <Script src="https://cdn.plot.ly/plotly-2.20.0.min.js" />
       <div className="flex items-center justify-center relative h-screen">
         <div className="font-mono text-center">
           <svg
@@ -237,6 +320,8 @@ const RaceMe = () => {
           </h3>
           <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
           <h3 className="text-center sm:text-left">Time: {seconds}</h3>
+          {isBodyRace && <BodyRace setCurrBodyRaceChar={setCurrBodyRaceChar} />}
+          {currBodyRaceChar && <p className=" text-9xl">{currBodyRaceChar}</p>}
           {loading ? (
             <p className="whitespace-pre width-race-me-text">
               {" "}
@@ -295,6 +380,18 @@ const RaceMe = () => {
               />
             </svg>
           </span>
+          <button
+            className="bg-red-400 tab"
+            onClick={() => setIsBodyRace((prev) => !prev)}
+            onKeyDown={(e) => {
+              if (e.key === " ") {
+                e.preventDefault();
+              }
+            }}
+          >
+            {isBodyRace ? "Race me" : "Body race"}
+          </button>
+
           {seconds === 0 && (
             <div className="font-mono px-4 sm:px-0">
               <div className="h-64">
