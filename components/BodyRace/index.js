@@ -1,3 +1,5 @@
+// Acknowledgements: https://www.youtube.com/watch?v=h376W93gQq4, https://github.com/everythingishacked/Semaphore
+
 import React, { useEffect, useRef, useState } from "react";
 
 const VISIBILITY_THRESHOLD = 0.8;
