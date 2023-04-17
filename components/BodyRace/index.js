@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const VISIBILITY_THRESHOLD = 0.8;
 const STRAIGHT_LIMB_MARGIN = 20;
@@ -45,7 +45,6 @@ class SemaphoreGestures {
   }
 
   output(semaphore) {
-    console.log("Typed semaphore: " + semaphore);
     this.callback(semaphore);
     this.lastSemaphore = semaphore;
   }
@@ -88,7 +87,7 @@ class SemaphoreGestures {
     const SEMAPHORES = {
       "45,90": { a: "a", n: "1" },
       "0,90": { a: "b", n: "2" },
-      "45,90": { a: "c", n: "3" },
+      "-45,90": { a: "c", n: "3" },
       "-90,90": { a: "d", n: "4" },
       "90,225": { a: "e", n: "5" },
       "90,180": { a: "f", n: "6" },
@@ -122,7 +121,6 @@ class SemaphoreGestures {
 
     if (arm_match) {
       const current_semaphore = arm_match; // modify this assignment if necessary depending on your semaphore dictionary structure
-      //   console.log("Current Semaphore: ", current_semaphore);
       return current_semaphore;
     }
   }
@@ -132,6 +130,8 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const landmarkContainerRef = useRef(null);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -143,12 +143,10 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
 
     const semaphoreGestures = new SemaphoreGestures(setCurrBodyRaceChar);
     function onResults(results) {
-      // console.log("getting reuslts");
       if (!results.poseLandmarks) {
         grid.updateLandmarks([]);
         return;
       }
-      //   console.log("GOT LANDMARKS");
 
       canvasCtx.save();
       canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -201,7 +199,6 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
         is_limb_pointing(upperPointL, midPointL, lowerPointL) ||
         is_limb_pointing(upperPointR, midPointR, lowerPointR)
       ) {
-        // console.log("A limb is pointing!");
         const shoulderL = results.poseLandmarks[11];
         const elbowL = results.poseLandmarks[13];
         const wristL = results.poseLandmarks[15];
@@ -214,7 +211,6 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
 
         const armLAngle = semaphoreGestures.getLimbDirection(armL);
         const armRAngle = semaphoreGestures.getLimbDirection(armR);
-        console.log("armLAngle", armLAngle, "armRAngle", armRAngle);
 
         const currentSemaphore = semaphoreGestures.typeSemaphore(
           armLAngle,
@@ -222,15 +218,12 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
         );
         if (currentSemaphore) {
           const currentKey = currentSemaphore["a"];
-          //   console.log(currentKey, armLAngle, armRAngle);
-          //   console.log("Current Semaphore: ", currentSemaphore);
           if (currentKey !== semaphoreGestures.lastSemaphore) {
             semaphoreGestures.output(currentKey === "space" ? " " : currentKey);
           }
         }
       } else {
         if (semaphoreGestures.lastSemaphore !== "") {
-          //   console.log("No limbs are pointing");
           semaphoreGestures.output("");
         }
       }
@@ -251,7 +244,6 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
     });
     pose.onResults(onResults);
 
-    console.log("making declare");
     const camera = new Camera(videoElement, {
       onFrame: async () => {
         await pose.send({ image: videoElement });
@@ -267,14 +259,20 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    return () => window.removeEventListener("resize", resizeCanvas);
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      camera.stop();
+    };
   }, []);
 
   return (
     <div className="container">
+      {isLoading && <div>Loading camera...</div>}
       <video
         className="input_video"
         ref={videoRef}
+        onLoadStart={() => setIsLoading(true)}
+        onLoadedData={() => setIsLoading(false)}
         style={{ transform: `rotateY(180deg)` }}
       ></video>
       <canvas

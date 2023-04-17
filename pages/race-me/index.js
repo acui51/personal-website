@@ -4,7 +4,7 @@ import ToggleButton from "components/ToggleButton";
 import { useRouter } from "next/router";
 import MyResponsiveLine from "components/LineGraph";
 import { useTheme } from "next-themes";
-import { db } from "../../firebase";
+import { app, db } from "../../firebase";
 import { doc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useIsSm } from "../../hooks/useMediaQuery";
 import Filter from "bad-words";
@@ -13,10 +13,13 @@ import Head from "next/head";
 import useBodyKeyPress from "hooks/useBodyKeyPress";
 import BodyRace from "components/BodyRace";
 import Script from "next/script";
+import { getFunctions, httpsCallable } from "firebase/functions";
+
+const cloudFunctions = getFunctions(app);
 
 const currentTime = () => new Date().getTime();
 
-const Start = ({ startTime }) => {
+const Start = ({ startTime, isBodyRace }) => {
   return (
     <div
       className={
@@ -24,7 +27,34 @@ const Start = ({ startTime }) => {
       }
     >
       <span>^</span>
-      <p>Start typing</p>
+      <p>
+        {isBodyRace ? (
+          <span className="inline-flex gap-2">
+            Start moving{" "}
+            <a
+              href="https://en.wikipedia.org/wiki/Flag_semaphore"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                />
+              </svg>
+            </a>
+          </span>
+        ) : (
+          "Start typing"
+        )}
+      </p>
     </div>
   );
 };
@@ -107,9 +137,16 @@ const RaceMe = () => {
       }
     });
 
-    await updateDoc(doc(db, dbToPost, colToPost), {
+    const updateLeaderboard = httpsCallable(
+      cloudFunctions,
+      "updateLeaderboard"
+    );
+    await updateLeaderboard({
+      dbToPost,
+      colToPost,
       leaderboard: newLeaderboard.slice(0, 5),
     });
+
     setSubmitLeaderboardLoading(true);
     setShowLeaderboardSubmission(false);
   };
@@ -211,6 +248,11 @@ const RaceMe = () => {
   }, currBodyRaceChar);
 
   useKeyPress((key) => {
+    // Do nothing if we ARE body racing
+    if (isBodyRace) {
+      return;
+    }
+
     // Start the timer
     if (!startTime) {
       setStartTime(currentTime);
@@ -315,13 +357,37 @@ const RaceMe = () => {
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          <h3 className="hover:bg-[#FF990080] text-center sm:text-left sm:w-max cursor-default">
-            Race me
-          </h3>
+          <div className="w-full flex justify-between">
+            <h3
+              className={`${
+                !isBodyRace ? "bg-[#FF990080]" : ""
+              } text-center sm:text-left sm:w-max cursor-pointer`}
+              onClick={() => setIsBodyRace((prev) => !prev)}
+              onKeyDown={(e) => {
+                if (e.key === " ") {
+                  e.preventDefault();
+                }
+              }}
+            >
+              Race me
+            </h3>
+            <h3
+              className={`${
+                isBodyRace ? "bg-[#FF990080]" : ""
+              } text-center sm:text-left sm:w-max cursor-pointer`}
+              onClick={() => setIsBodyRace((prev) => !prev)}
+              onKeyDown={(e) => {
+                if (e.key === " ") {
+                  e.preventDefault();
+                }
+              }}
+            >
+              Body race
+            </h3>
+          </div>
           <h3 className="text-center sm:text-left">WPM: {wpm}</h3>
           <h3 className="text-center sm:text-left">Time: {seconds}</h3>
           {isBodyRace && <BodyRace setCurrBodyRaceChar={setCurrBodyRaceChar} />}
-          {currBodyRaceChar && <p className=" text-9xl">{currBodyRaceChar}</p>}
           {loading ? (
             <p className="whitespace-pre width-race-me-text">
               {" "}
@@ -333,13 +399,17 @@ const RaceMe = () => {
           ) : (
             <>
               <p className="whitespace-pre width-race-me-text w-screen justify-center flex">
-                <span className="text-gray-400">
+                <span
+                  className={`text-gray-400 ${isBodyRace ? "text-6xl" : ""}`}
+                >
                   {(leftPadding + outgoingChars).slice(isSm ? -25 : -30)}
                 </span>
                 <span
                   className={`${
                     incorrectChar ? "bg-red-400" : "bg-[#FF990080]"
-                  } relative flex justify-center`}
+                  } relative flex justify-center  ${
+                    isBodyRace ? "text-6xl" : ""
+                  }`}
                   onClick={handleTextClick}
                 >
                   {/* Hack for iOS mobile because empty space is rendered as empty string? */}
@@ -351,13 +421,16 @@ const RaceMe = () => {
                     />
                   )}
                 </span>
-                <span onClick={handleTextClick}>
+                <span
+                  onClick={handleTextClick}
+                  className={`${isBodyRace ? "text-6xl" : ""}`}
+                >
                   {incomingChars.substr(0, isSm ? 25 : 30)}
                 </span>
               </p>
             </>
           )}
-          <Start startTime={startTime} />
+          <Start startTime={startTime} isBodyRace={isBodyRace} />
           <span
             className={"" + (startTime && "cursor-pointer")}
             onClick={() => resetState()}
@@ -380,17 +453,6 @@ const RaceMe = () => {
               />
             </svg>
           </span>
-          <button
-            className="bg-red-400 tab"
-            onClick={() => setIsBodyRace((prev) => !prev)}
-            onKeyDown={(e) => {
-              if (e.key === " ") {
-                e.preventDefault();
-              }
-            }}
-          >
-            {isBodyRace ? "Race me" : "Body race"}
-          </button>
 
           {seconds === 0 && (
             <div className="font-mono px-4 sm:px-0">
