@@ -82,8 +82,8 @@ const RaceMe = () => {
   const [alixWpm, setAlixWpm] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [profanityDetected, setProfanityDetected] = useState(false);
-  const [isBodyRace, setIsBodyRace] = useState(false);
-  const [currBodyRaceChar, setCurrBodyRaceChar] = useState(null);
+  const [isBodyRace, setIsBodyRace] = useState(true);
+  const [currBodyRaceChar, setCurrBodyRaceChar] = useState("");
   const [showLeaderboardSubmission, setShowLeaderboardSubmission] =
     useState(true);
   const [submitLeaderboardLoading, setSubmitLeaderboardLoading] =
@@ -253,6 +253,7 @@ const RaceMe = () => {
       return;
     }
 
+    console.log("startTim uKP", startTime);
     // Start the timer
     if (!startTime) {
       setStartTime(currentTime);

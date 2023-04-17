@@ -134,6 +134,10 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (!window.LandmarkGrid) {
+      return;
+    }
+
     const videoElement = videoRef.current;
     const canvasElement = canvasRef.current;
     const canvasCtx = canvasElement.getContext("2d");
@@ -263,7 +267,7 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
       window.removeEventListener("resize", resizeCanvas);
       camera.stop();
     };
-  }, []);
+  }, [window.LandmarkGrid]);
 
   return (
     <div className="container">
