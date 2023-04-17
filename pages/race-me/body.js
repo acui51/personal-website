@@ -341,7 +341,7 @@ const RaceMe = () => {
         crossOrigin="anonymous"
       />
       <Script src="https://cdn.plot.ly/plotly-2.20.0.min.js" />
-      <div className="flex items-center justify-center relative h-screen">
+      <div className="flex flex-col items-center justify-center relative h-screen">
         <div className="font-mono text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -541,6 +541,13 @@ const RaceMe = () => {
             </div>
           )}
         </div>
+        <a
+          href="https://github.com/everythingishacked/Semaphore"
+          className="text-sm text-gray-500 underline"
+          target="_blank"
+        >
+          Reference
+        </a>
       </div>
     </>
   );
