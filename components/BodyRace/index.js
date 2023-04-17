@@ -270,6 +270,7 @@ const BodyRace = ({ setCurrBodyRaceChar }) => {
       {isLoading && <div>Loading camera...</div>}
       <video
         className="input_video"
+        playsInline
         ref={videoRef}
         onLoadStart={() => setIsLoading(true)}
         onLoadedData={() => setIsLoading(false)}
