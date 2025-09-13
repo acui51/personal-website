@@ -54,9 +54,8 @@ export default function Home() {
               Hi, I'm Alix {theme === "light" ? "⛰" : "🌋"}
             </h1>
             <p className="mb-3 text-gray-600 dark:text-gray-200">
-              I'm currently a senior at Stanford University with recent
-              engineering experience at Glean, Amazon Web Services, and The
-              Washington Post. Sometimes, I enjoy taking typing tests. Race me{" "}
+              Currently engineering at Glean building out our AI products.
+              Typerace me{" "}
               <a
                 className="border-b border-gray-600 hover:border-b-0 cursor-pointer"
                 onClick={() => router.push("/race-me")}
@@ -80,7 +79,7 @@ export default function Home() {
               >
                 <AiFillLinkedin size={24} />
               </a>
-              <a href="mailto:acui@stanford.edu">
+              <a href="mailto:cuialix@gmail.com">
                 <AiFillMail size={24} />
               </a>
               <a href="/resume.pdf" target="_blank" rel="noreferrer">
